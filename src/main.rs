@@ -1,11 +1,14 @@
 mod priority_queue;
-use rand::{self, Rng};
+use rand::Rng;
+
 fn main() {
     let mut pq = priority_queue::PriorityQueue::new();
     
     // Generate random numbers for priority queue
     let mut rng = rand::thread_rng();
 
+    // How many numbers to generate and add to queue
+    // as well as dequeue
     let num = 50;
 
     for _ in 0..num {
