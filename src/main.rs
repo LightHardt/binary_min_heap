@@ -1,29 +1,38 @@
 mod priority_queue;
+use rand::{self, Rng};
 fn main() {
     let mut pq = priority_queue::PriorityQueue::new();
-
-    pq.enqueue(78);
-    pq.enqueue(79);
-    pq.enqueue(90);
-    pq.enqueue(64);
-    pq.enqueue(78);
-    pq.enqueue(65);
-    pq.enqueue(78);
     
-    // pattern matching to handle Option<i32> return
+    // Generate random numbers for priority queue
+    let mut rng = rand::thread_rng();
+
+    let num = 50;
+
+    for _ in 0..num {
+        pq.enqueue(rng.gen_range(1..10000))
+    }
+
+    // Dequeue all numbers
+    for _ in 0..num {
+        match pq.dequeue() {
+            Some(y) => print!("{} ",y),
+            None => print!("None"),
+        }
+    }
+
+    println!();
+    
+    // Should print Empty
     match pq.peek() {
         Some(x) => println!("{}",x),
         None => println!("Empty"),
     }
 
-    pq.dequeue();
-    pq.dequeue();
-    
-    match pq.peek() {
-        Some(x) => println!("{}",x),
-        None => println!("Empty"),
-    }
+    pq.enqueue(3);
+    pq.enqueue(2);
+    pq.enqueue(1);
 
+    // Should print 1 3 2
     pq.print();
     
 }
