@@ -151,3 +151,64 @@ impl PriorityQueue {
         return root;
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_peek() {
+        let mut pq = PriorityQueue::new();
+
+        pq.enqueue(5);
+        assert_eq!(Some(5),pq.peek());
+        
+        pq.dequeue();
+        assert_eq!(None,pq.peek());
+    }
+
+    #[test]
+    fn test_is_empty() {
+        let mut pq = PriorityQueue::new();
+
+        assert!(pq.is_empty());
+        
+        pq.enqueue(5);
+        assert!(!pq.is_empty());
+
+        pq.dequeue();
+        assert!(pq.is_empty());
+    }
+
+    #[test]
+    fn test_enqueue() {
+        let mut pq = PriorityQueue::new();
+
+        pq.enqueue(1);
+        assert_eq!(Some(1),pq.peek());
+
+        pq.enqueue(-1);
+        assert_eq!(Some(-1),pq.peek());
+
+        pq.enqueue(5);
+        assert_eq!(Some(-1),pq.peek());
+
+        pq.enqueue(-2);
+        assert_eq!(Some(-2),pq.peek());
+    }
+
+    #[test]
+    fn test_dequeue() {
+        let mut pq = PriorityQueue::new();
+
+        pq.enqueue(5);
+        pq.enqueue(2);
+        pq.enqueue(10);
+        pq.enqueue(7);
+
+        assert_eq!(Some(2),pq.dequeue());
+        assert_eq!(Some(5),pq.dequeue());
+        assert_eq!(Some(7),pq.dequeue());
+        assert_eq!(Some(10),pq.dequeue());
+    }
+}

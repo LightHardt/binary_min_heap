@@ -9,12 +9,16 @@ fn main() {
 
     // How many numbers to generate and add to queue
     // as well as dequeue
-    let num = 50;
+    let num = 10;
 
     for _ in 0..num {
-        pq.enqueue(rng.gen_range(1..10000))
+        pq.enqueue(rng.gen_range(1..1000))
     }
 
+    print!("Array View: ");
+    pq.print();
+
+    print!("Sorted View: ");
     // Dequeue all numbers
     for _ in 0..num {
         match pq.dequeue() {
@@ -22,20 +26,9 @@ fn main() {
             None => print!("None"),
         }
     }
-
     println!();
-    
-    // Should print Empty
-    match pq.peek() {
-        Some(x) => println!("{}",x),
-        None => println!("Empty"),
-    }
 
-    pq.enqueue(3);
-    pq.enqueue(2);
-    pq.enqueue(1);
-
-    // Should print 1 3 2
-    pq.print();
+    // Use just to remove warning
+    pq.peek();
     
 }
