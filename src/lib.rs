@@ -1,12 +1,14 @@
+use std::fmt::Display;
+
 // Priority Queue implemented with binary min heap
-pub struct PriorityQueue {
-    heap: Vec<i32>,
+pub struct PriorityQueue<T> {
+    heap: Vec<T>,
 }
-impl PriorityQueue {
+impl<T: Ord + Eq + Display + Copy + Clone> PriorityQueue<T> {
 
     // Generate priority queue with empty heap
     pub fn new() -> Self {
-        let heap = Vec::<i32>::new();
+        let heap = Vec::<T>::new();
         let pq = PriorityQueue { heap };
         pq
     }
@@ -19,7 +21,7 @@ impl PriorityQueue {
     }
 
     // Returns min element in heap without removing it
-    pub fn peek(&self) -> Option<i32> {
+    pub fn peek(&self) -> Option<T> {
         if self.is_empty() {
             return None;
         }
@@ -35,7 +37,7 @@ impl PriorityQueue {
     }
 
     // Add element to heap and maintain heap by percolating value up if needed
-    pub fn enqueue(&mut self, val: i32) {
+    pub fn enqueue(&mut self, val: T) {
         if self.is_empty() {
             self.heap.push(val);
             return;
@@ -84,7 +86,7 @@ impl PriorityQueue {
     }
 
     // Remove min value and maintain min heap status
-    pub fn dequeue(&mut self) -> Option<i32> {
+    pub fn dequeue(&mut self) -> Option<T> {
         if self.is_empty() {
             return None;
         }
@@ -149,6 +151,10 @@ impl PriorityQueue {
         }
 
         return root;
+    }
+
+    pub fn len(&self) -> usize{
+        return self.heap.len();
     }
 }
 
